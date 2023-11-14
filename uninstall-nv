@@ -1,0 +1,2 @@
+#!/bin/bash
+helm uninstall -n gpu-operator $(helm ls -n gpu-operator | cut -f 1 | tail -n 1)

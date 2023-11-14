@@ -1,0 +1,10 @@
+#!/bin/bash
+KERNEL_VERSION="$(uname -r)"
+NVIDIA_DRIVER_VERSION=535.104.12
+DOMAIN=siomporas.com
+
+docker build -t container-registry.$DOMAIN/nvidia/driver:$NVIDIA_DRIVER_VERSION-rocky8.8 \
+     --build-arg "NVIDIA_DRIVER_VERSION=$NVIDIA_DRIVER_VERSION" -f Dockerfile .
+
+helm install     -n gpu-operator     --create-namespace     --set driver.repository=container-registry.$DOMAIN/nvidia    \
+      --set driver.version=$NVIDIA_DRIVER_VERSION     gpu-operator     nvidia/gpu-operator
