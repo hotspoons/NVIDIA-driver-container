@@ -131,7 +131,8 @@ _install_prerequisites() (
     echo "kernel requires gcc version: 'gcc-${gcc_version}', current gcc version is '${current_gcc}'"
 
     if ! [[ "${current_gcc}" =~ "gcc-${gcc_version}"-.* ]]; then
-        dnf install -q -y --releasever=${DNF_RELEASEVER} "gcc-${gcc_version}"
+        echo "Should be doing GCC now"
+        dnf install -q -y --releasever=${DNF_RELEASEVER} "gcc"
     fi
 )
 
