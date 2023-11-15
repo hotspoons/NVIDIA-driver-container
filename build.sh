@@ -13,5 +13,6 @@ docker build -t "$CONTAINER_REGISTRY/nvidia/driver:$NVIDIA_DRIVER_VERSION-${OS_N
      --build-arg "NVIDIA_DRIVER_VERSION=$NVIDIA_DRIVER_VERSION" \
      --build-arg "KERNEL_VERSION=$KERNEL_VERSION" \
      --build-arg "RPM_BASE_URL=$RPM_BASE_URL" \
+     --build-arg "OS_RELEASE=$OS_RELEASE" \
      -f Dockerfile .
 docker push $CONTAINER_REGISTRY/nvidia/driver:$NVIDIA_DRIVER_VERSION-${OS_NAME}${OS_RELEASE}
