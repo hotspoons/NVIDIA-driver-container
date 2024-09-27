@@ -4,4 +4,6 @@ $SCRIPT_DIR/../build.sh
 NVIDIA_DRIVER_VERSION="${NVIDIA_DRIVER_VERSION:-535.104.12}"
 CONTAINER_REGISTRY="${CONTAINER_REGISTRY:-container-registry.siomporas.com}"
 helm install     -n gpu-operator     --create-namespace     --set driver.repository=$CONTAINER_REGISTRY/nvidia    \
-      --set driver.version=$NVIDIA_DRIVER_VERSION     gpu-operator     nvidia/gpu-operator
+      --set driver.version=$NVIDIA_DRIVER_VERSION     gpu-operator     nvidia/gpu-operator    \
+      --set validator.driver.env[0].name=DISABLE_DEV_CHAR_SYMLINK_CREATION    \
+      --set-string validator.driver.env[0].value=true
