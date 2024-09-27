@@ -1,5 +1,7 @@
 #!/bin/bash
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 $SCRIPT_DIR/../build.sh
+NVIDIA_DRIVER_VERSION="${NVIDIA_DRIVER_VERSION:-535.104.12}"
+CONTAINER_REGISTRY="${CONTAINER_REGISTRY:-container-registry.siomporas.com}"
 helm install     -n gpu-operator     --create-namespace     --set driver.repository=$CONTAINER_REGISTRY/nvidia    \
       --set driver.version=$NVIDIA_DRIVER_VERSION     gpu-operator     nvidia/gpu-operator

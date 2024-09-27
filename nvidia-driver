@@ -168,6 +168,9 @@ _create_driver_package() (
     echo "Compiling NVIDIA driver kernel modules..."
     cd /usr/src/nvidia-${DRIVER_VERSION}/${KERNEL_TYPE}
 
+    echo "Monkey patching MPOL_PREFERRED_MANY 1"
+    sed -i 's/MPOL_PREFERRED_MANY/NVIDIA_MPOL_PREFERRED_MANY/g' /usr/src/nvidia-${DRIVER_VERSION}/kernel/nvidia-uvm/uvm_linux.h
+
     if _gpu_direct_rdma_enabled; then
         ln -s /run/mellanox/drivers/usr/src/ofa_kernel /usr/src/
         # if arch directory exists(MOFED >=5.5) then create a symlink as expected by GPU driver installer
